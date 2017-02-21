@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<script src="components/loader.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDMoExTGwRsrTP347BpdwHJC74f5FmC6Ao" type="text/javascript"></script>
+	<link rel="stylesheet" href="components/loader.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="app.js"></script>
+<script src="js/app.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/cssua.min.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/easyselectbox.min.js"></script>
+</head>
+<body>
+<ons-navigator var="appnavi"></ons-navigator>
+<div class="load">
+	<div class="load-mask"><i class="fa fa-spinner  fa-4x fa-spin" id="guruguru"></i><br><span id="load_txt">ロード中</span></div>
+</div>
+
+
+<!-- ログインページ -->
+<ons-template id="LoginPage.html">
+		<section data-role="content" id="v_height">
+		<div class="s_head cf" style="background:#4a67ad;">
+			<h1>ログイン</h1>
+		</div>
+			<div class="kanri_f"></div>
+			<div class="kanri_f"></div>
+		<div class="from_area">
+		<label>会員名</label>
+		<input type="text" id="login_username" class="form_sen" ng-model="userNameLogin">
+		<label>パスワード</label>
+		<input type="password" id="login_password" class="form_sen" ng-model="passwordLogin">
+		</div>
+		<div onclick="onLoginBtn()" id="LoginBtn" class="blue_btn">ログイン</div>
+		<div class="regbtn"><a href="#" onclick="kiyaku()">新規登録<i class="fa fa-arrow-right" aria-hidden="true"></i></a></div>
+			<div class="kanri_f"></div>
+			<div align="center"><span id="ver">Ver 1.0.0</span></div>
+	</section>
+</ons-template>
+
+
+
+<!-- 規約ページ -->
+<ons-template id="kiyaku.html">
+		<section data-role="content">
+		<div class="s_head2">
+			<div onclick="appnavi.popPage()" class="modoru"><img src="img/back2.png"></div>
+			<h1>個人情報の取り扱い</h1>
+		</div>
+			<div class="kanri_f"></div>
+	<div class="kousin">
+第１条（個人情報の取り扱い）<br>
+1.株式会社RELI.STYLE（以下、「当社」といいます。）は、会員の個人情報（以下、「個人情報」といいます。）の収集・利用・提供を行うものとします。<br>
+2.当社は、会員の意に反する個人情報の取り扱い防止と会員のプライバシー保護に十分配慮するとともに、正確性・機密性の維持に努めるべく個人情報を厳重に管理するものとします。<br>
+3.会員は、自己の個人情報の取り扱いに関し、本規定に定める内容に同意するものとします。<br>
+5.プッシュ通知等の送信許可を確認されることがありますが、これは、会員が使用する端末の仕様によるものであり、本アプリ内の個人情報収集・利用に対する同意・不同意ではないため、プッシュ通知等を拒んだ場合でも会員の退会事由にはあたりません。<br>
+<br>
+第２条（個人情報の収集）<br>
+当社は、次条に定める利用目的のため、以下のような個人情報につき保護措置を講じた上で適法かつ公正な手段により収集・利用します。<br>
+（1）属性情報　会員が所定の申込書に記載する等により申告した会員の姓名、性別、年齢、電話番号、メールアドレス、会員の属性に関する情報（その他申込時、及び申込後に会員から通知を受ける等により、当社が知り得た変更情報を含みます。以下同じ。）<br>
+（2）契約情報　入会日等の契約内容に関する情報<br>
+（3）本アプリを利用・閲覧した場合の、端末の利用環境(OS種類、OSバージョン、製品名、型番等)、利用時間、エラー情報等に関する情報<br>
+<br>
+第3条（個人情報の利用目的）<br>
+当社は、下記に掲げる利用目的のために個人情報を利用いたします。<br>
+（1）会員の属性毎の利用状況の把握、円滑な運営（会員証の発行を含みます。）のため。<br>
+（2）会員に対して、会員によるサービス利用に関連して必要な連絡等を行うため。<br>
+（3）サービスの廃止、運営の停止、脱退、後継サービスへの引き継ぎ等やそれらに関連する業務を行うため。<br>
+（4）会員に対して、各種キャンペーンやイベントの案内や当社の様々なサービス情報その他の営業案内又は情報提供のため。<br>
+（5）サービスの利用状況の調査及び分析その他のマーケティング分析（個人を特定できないよう加工した分析結果を第三者へ提供する方法等によりマーケティングに活用することを含む）を行うため。<br>
+（6）会員の皆様からのお問合せ、苦情等に対し適切に対応するため。<br>
+（7）業務を行うために必要な範囲で第三者提供を行うため。<br>
+（8）サービスの内容改善による利便性の向上及び、会員に対して興味・関心度の高い情報を適切なタイミングで提供するため。<br>
+（9）その他上記各目的に準ずるか、これらに密接に関連する目的のため。<br>
+<br>
+第４条（本特約の変更等）<br>
+1.当社は、本サービスの全部又は一部の内容及び本特約を必要に応じ事前の予告なく、随時変更することができるものとします。<br>
+2.本サービスのご利用条件その他本特約の規定の変更の内容については、ウェブサイト等にアクセスしていただくことで確認することが可能です。<br>
+<br>
+第５条（会員による本サービスの利用の終了）<br>
+会員は、本ソフトウェアのインストールされたアプリケーションのアンインストールその他当社所定の手続きを行っていただくことにより、本サービスの利用を終了することができます。<br>
+</div>
+	<div class="text_kiyaku">
+	<label for="kiyaku">
+	<input id="kiyaku" type="checkbox">上記利用規約に同意する
+	</label>
+	</div>
+	
+	<div onclick="RegisterPage()" class="blue_btn">次へ</div>
+	</section>
+</ons-template>
+
+
+<!-- スキャンページ -->
+<ons-template id="Scan.html">
+	<section data-role="content">
+		<div class="kanri_f"></div>
+		<div id="scan_spase2"></div>
+		<div id="logo_kitohon"><img src="img/kitohon.png"></div>
+		<div id="ResultMessage">ここに結果が表示されます。</div>
+		<div id="scan_spase"></div>
+		<div id="ResultMessage_time"></div>
+		
+		<div id="sen2">
+		<div id="ResultMessage_meisai">
+		<span id="logput_name"></span>様<br>
+		本日はご利用ありがとうございました。<br>
+		料金は以下のとおりです。<br>
+		<div align="center">
+			<div class="maney_font">￥<span id="logput_money"></span>-</div>
+			ー内訳ー<br>
+			</div>
+			ご来店時間　<span id="logput_in"></span><br />
+			ご退店時間　<span id="logput_out"></span><br />
+			ご滞在時間　<span id="logput_time"></span><br />
+			<!--
+			ご利用番号：<span id="logput_no"></span><br />
+			ご利用料金は、サンプルのため　「入場料　３００円」と「5秒につき１００円」となっています。<br>
+			-->
+		</div>
+		</div>
+			<div id="load_err"></div>
+		<div onClick="scanBarcode()" id="ad_in" class="blue_btn_maru">SCAN</div>
+		<div class="blue_btn_maru" id="ad_out" style="display: none;" onClick ="scanBarcode_out()">退室する(SCAN)</div>
+		<div class="blue_btn_cf cf">
+			<div onclick="edit()" class="blue_btn_left">設定変更</div>
+			<div class="blue_btn_right" id="log_out" onClick ="onLogoutBtn()">ログアウト</div>
+		</div>
+		<div id="BrowserOpenButton" style="display: none;"><input onClick ="scanBarcode()" type="button" value ="URLをブラウザで開く" /></div>
+	</section>
+</ons-template>
+
+<!-- 違反ページ -->
+<ons-template id="ihan.html">
+		<div class="menu_head cf">
+			<h1>アクセスできません</h1>
+		</div>
+		<section data-role="content">
+			<div class="kanri_f"></div>
+			<div class="ihan">ご利用中の端末は現在アクセス制限が掛かっています。<br /><br />身に覚えがない場合、園にお問合せください。</div>
+		</section>
+</ons-template>
+
+
+<!-- ユーザー情報登録ページ -->
+<ons-template id="RegisterPage.html" class="back_s">
+	<div class="s_head cf" style="background:#4a67ad">
+		<div onclick="appnavi.popPage()" class="modoru"><img src="img/back.png"></div>
+		<h1>新規登録</h1>
+	</div>
+	<div class="kanri_f"></div>
+	<section data-role="content">
+	<!--
+	<div class="from_area5"><br>
+		<span class="touroku_title">ユーザー登録</span>
+	</div>
+	-->
+	<div class="edit_page">
+	<div class="from_area3">
+		<label for="user" class="from_title">ユーザ名:</label><span id="regi1"></span>
+	<input type="text" id="reg_username" class="form_sen">
+		<label for="pass" class="from_title">パスワード:</label></label><span id="regi2"></span>
+	<input type="password" id="reg_password" class="form_sen">
+	</div><!--from_area3-->
+	</div><!--edit_page-->
+		<div onclick="onRegisterBtn2()" class="blue_btn">新規登録</div>
+	</section>
+</ons-template>
+
+
+<!-- オプション情報登録ページ -->
+<ons-template id="RegisterPage2.html" class="back_s">
+	<div class="s_head cf" style="background:#4a67ad">
+		<div onclick="appnavi.popPage()" class="modoru"><img src="img/back.png"></div>
+		<h1>オプション設定</h1>
+	</div>
+	<div class="kanri_f"></div>
+	<section data-role="content">
+	<!--
+	<div class="from_area5"><br>
+		<span class="touroku_title">ユーザー登録</span>
+	</div>
+	-->
+	<div class="edit_page">
+	<div class="from_area3">
+	<label for="age" class="from_title">年齢：</label><br />
+			<select name="year" id="opsion_age" class="select_form">
+				<option value="15～19歳">15～19歳</option>
+				<option value="20～25歳">20～25歳</option>
+				<option value="26～30歳">26～30歳</option>
+				<option value="31～35歳">31～35歳</option>
+				<option value="36～40歳">36～40歳</option>
+				<option value="41～45歳">41～45歳</option>
+				<option value="46～50歳">46～50歳</option>
+				<option value="51～55歳">51～55歳</option>
+				<option value="56～60歳">56～60歳</option>
+				<option value="61～65歳">61～65歳</option>
+				<option value="66歳以上">66歳以上</option>
+			</select>
+				<br><br>
+		<label for="sex" class="from_title">性別：</label><br />
+		<input type="radio" name="opsion_sex" value="男性" checked  id="男性"><label class="radio" for="男性">男性</label>
+		<input type="radio" name="opsion_sex" value="女性" id="女性"><label class="radio" for="女性">女性</label>
+	</div><!--from_area3-->
+	</div><!--edit_page-->
+		<div onclick="opsion_btn()" class="blue_btn">決定</div>
+		<div onclick="opsion_skip()" class="blue_btn">スキップ</div>
+	</section>
+</ons-template>
+	   
+	
+
+
+
+<!-- ユーザー情報変更ページ -->
+<ons-template id="edit.html" class="back_s">
+	<div class="s_head cf" style="background:#4a67ad">
+		<div onclick="appnavi.popPage()" class="modoru"><img src="img/back.png"></div>
+		<h1>設定変更</h1>
+	</div>
+	<div class="kanri_f"></div>
+	<section data-role="content">
+	<div class="from_area5"><br>
+		<span class="touroku_title">※ユーザ名は変更できません</span>
+		<div class="touroku_txt"></div>
+	</div>
+	<div class="edit_page">
+	<div class="from_area3">
+	<label for="user" class="from_title">ユーザ名:</label>
+	<input type="text" id="c_name" class="form_sen" disabled="disabled">
+	<label for="age" class="from_title">年齢：</label><br />
+		<select name="year" id="c_age" class="select_form">
+			<option value="15～19歳">15～19歳</option>
+			<option value="20～25歳">20～25歳</option>
+			<option value="26～30歳">26～30歳</option>
+			<option value="31～35歳">31～35歳</option>
+			<option value="36～40歳">36～40歳</option>
+			<option value="41～45歳">41～45歳</option>
+			<option value="46～50歳">46～50歳</option>
+			<option value="51～55歳">51～55歳</option>
+			<option value="56～60歳">56～60歳</option>
+			<option value="61～65歳">61～65歳</option>
+			<option value="66歳以上">66歳以上</option>
+		</select>
+		<br><br>
+		<label for="sex" class="from_title">性別：</label><br />
+		<input type="radio" name="c_sex" value="男性" id="男性"><label class="radio" for="男性">男性</label>
+		<input type="radio" name="c_sex" value="女性" id="女性"><label class="radio" for="女性">女性</label>
+	</div><!--from_area3-->
+	</div><!--edit_page-->
+		<div class="blue_btn" onClick ="c_btn()">変更する</div>
+	</section>
+</ons-template>
+	<script>function test(){
+	$("#c_name").val("test");
+	}
+	</script>
+	
+	
+	
+	
+</body>
+</html>
